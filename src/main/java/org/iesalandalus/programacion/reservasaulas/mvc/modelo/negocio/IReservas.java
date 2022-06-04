@@ -11,23 +11,27 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public interface IReservas {
 
-	List<Reserva> getReservas();
-	
-	int getNumReservas();
-	
-	void insertar(Reserva reserva) throws OperationNotSupportedException;
-	
-	Reserva buscar(Reserva reserva);
-	
-	void borrar(Reserva reserva) throws OperationNotSupportedException;
-	
-	List<String> representar();
-	
-	List<Reserva> getReservasProfesor(Profesor profesor);
-	
-	List<Reserva> getReservasAula(Aula aula);
-	
-	List<Reserva> getReservasPermanencia(Permanencia permanencia);
-	
-	boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
+    List<Reserva> getReservas();
+
+    void comenzar();
+
+    void terminar();
+
+    int getNumReservas();
+
+    void insertar(Reserva reserva) throws OperationNotSupportedException;
+
+    Reserva buscar(Reserva reserva);
+
+    void borrar(Reserva reserva) throws OperationNotSupportedException;
+
+    List<String> representar();
+
+    List<Reserva> getReservasProfesor(Profesor profesor);
+
+    List<Reserva> getReservasAula(Aula aula);
+
+    List<Reserva> getReservasPermanencia(Permanencia permanencia);
+
+    boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
 }

@@ -10,42 +10,45 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public interface IModelo {
+    List<Aula> getAulas();
 
-	List<Aula> getAulas();
+    void comenzar();
 
-	List<String> representarAulas();
+    void terminar();
 
-	Aula buscarAula(Aula aula);
+    List<String> representarAulas();
 
-	void insertarAula(Aula aula) throws OperationNotSupportedException;
+    Aula buscarAula(Aula aula);
 
-	void borrarAula(Aula aula) throws OperationNotSupportedException;
+    void insertarAula(Aula aula) throws OperationNotSupportedException;
 
-	List<Profesor> getProfesores();
+    void borrarAula(Aula aula) throws OperationNotSupportedException;
 
-	List<String> representarProfesores();
+    List<Profesor> getProfesores();
 
-	Profesor buscarProfesor(Profesor profesor);
+    List<String> representarProfesores();
 
-	void insertarProfesor(Profesor profesor) throws OperationNotSupportedException;
+    Profesor buscarProfesor(Profesor profesor);
 
-	void borrarProfesor(Profesor profesor) throws OperationNotSupportedException;
+    void insertarProfesor(Profesor profesor) throws OperationNotSupportedException;
 
-	List<Reserva> getReservas();
+    void borrarProfesor(Profesor profesor) throws OperationNotSupportedException;
 
-	List<String> representarReservas();
+    List<Reserva> getReservas();
 
-	Reserva buscarReserva(Reserva reserva);
+    List<String> representarReservas();
 
-	void realizarReserva(Reserva reserva) throws OperationNotSupportedException;
+    Reserva buscarReserva(Reserva reserva);
 
-	void anularReserva(Reserva reserva) throws OperationNotSupportedException;
+    void realizarReserva(Reserva reserva) throws OperationNotSupportedException;
 
-	List<Reserva> getReservasAula(Aula aula);
+    void anularReserva(Reserva reserva) throws OperationNotSupportedException;
 
-	List<Reserva> getReservasProfesor(Profesor profesor);
+    List<Reserva> getReservasAula(Aula aula);
 
-	List<Reserva> getReservasPermanencia(Permanencia permanencia);
+    List<Reserva> getReservasProfesor(Profesor profesor);
 
-	boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
+    List<Reserva> getReservasPermanencia(Permanencia permanencia);
+
+    boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
 }

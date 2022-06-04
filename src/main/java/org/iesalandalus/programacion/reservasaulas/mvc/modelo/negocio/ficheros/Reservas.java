@@ -1,5 +1,13 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,6 +27,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
 public class Reservas implements IReservas {
 
     private List<Reserva> coleccionReservas;
+    private static final String NOMBRE_FICHERO_RESERVAS = "datos/FichReservas.dat";
     private static final float MAX_PUNTOS_PROFESOR_MES = 200f;
 
     // Constructor por defecto que crea un ArrayList
@@ -37,12 +46,49 @@ public class Reservas implements IReservas {
 
     @Override
     public void comenzar() {
-
+        leer();
     }
 
+    private void leer() {
+        File archivo = new File(NOMBRE_FICHERO_RESERVAS);
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(archivo))) {
+            Reserva reserva = null;
+
+            do {
+                reserva = (Reserva) entrada.readObject();
+                insertar(reserva);
+            } while(reserva != null);
+        } catch(FileNotFoundException e) {
+            System.out.println("ERROR: Fichero no encontrado.");
+        } catch(EOFException e) {
+            System.out.println("Fichero leído correctamente.");
+        } catch(IOException e) {
+            System.out.println("Error de I/O.");
+        } catch(ClassNotFoundException e) {
+            System.out.println("ERROR: No se ha encontrado la clase.");
+        } catch (OperationNotSupportedException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
     @Override
     public void terminar() {
+        escribir();
+    }
 
+    private void escribir() {
+        File archivo = new File(NOMBRE_FICHERO_RESERVAS);
+
+        try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(archivo))) {
+            for (Reserva reserva : coleccionReservas) {
+                salida.writeObject(reserva);
+            }
+            System.out.println("Fichero de reservas actualizado");
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: No se pudo crear el fichero.");
+        } catch (IOException e) {
+            System.out.println("Error de I/O.");
+        }
     }
 
     // Método que establece las reservas
@@ -130,7 +176,7 @@ public class Reservas implements IReservas {
         coleccionReservas.add(reserva);
     }
 
-    // Comprueba que la reserva pasada como parámetro es una reserva para el mes
+    // Comprueba que la reserva pasada como par�metro es una reserva para el mes
     // siguiente o posteriores.
     // En caso afirmativo devolverá true mientras que en caso negativo devolverá
     // false
@@ -156,7 +202,7 @@ public class Reservas implements IReservas {
     }
 
     // Devuelve una lista de todas la reservas del profesor para el mes pasado por
-    // parámetro
+    // par�metro
     private List<Reserva> getReservasProfesorMes(Profesor profesor, LocalDate mes) {
         if (profesor == null) {
             throw new NullPointerException("ERROR: El profesor no puede ser nulo.");

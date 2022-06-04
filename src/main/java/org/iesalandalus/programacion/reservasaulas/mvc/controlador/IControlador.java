@@ -11,37 +11,44 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public interface IControlador {
 
-	void comenzar();
-	
-	void terminar();
-	
-	void insertarAula(Aula aula) throws OperationNotSupportedException;
+    void comenzar();
 
-	void insertarProfesor(Profesor profesor) throws OperationNotSupportedException;
+    void terminar();
 
-	void borrarAula(Aula aula) throws OperationNotSupportedException;
+    void insertarAula(Aula aula) throws OperationNotSupportedException;
 
-	void borrarProfesor(Profesor profesor) throws OperationNotSupportedException;
+    void insertarProfesor(Profesor profesor) throws OperationNotSupportedException;
 
-	Aula buscarAula(Aula aula);
+    void borrarAula(Aula aula) throws OperationNotSupportedException;
 
-	Profesor buscarProfesor(Profesor profesor);
+    void borrarProfesor(Profesor profesor) throws OperationNotSupportedException;
 
-	List<String> representarAulas();
+    Aula buscarAula(Aula aula);
 
-	List<String> representarProfesores();
+    Profesor buscarProfesor(Profesor profesor);
 
-	List<String> representarReservas();
+    List<String> representarAulas();
 
-	void realizarReserva(Reserva reserva) throws OperationNotSupportedException;
+    List<String> representarProfesores();
 
-	void anularReserva(Reserva reserva) throws OperationNotSupportedException;
+    List<String> representarReservas();
 
-	List<Reserva> getReservasAula(Aula aula);
+    void realizarReserva(Reserva reserva) throws OperationNotSupportedException;
 
-	List<Reserva> getReservasProfesor(Profesor profesor);
+    void anularReserva(Reserva reserva) throws OperationNotSupportedException;
 
-	List<Reserva> getReservasPermanencia(Permanencia permanencia);
+    List<Reserva> getReservasAula(Aula aula);
 
-	boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
+    List<Reserva> getReservasProfesor(Profesor profesor);
+
+    List<Reserva> getReservasPermanencia(Permanencia permanencia);
+
+    boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
+
+    List<Aula> getAulas();
+
+    List<Profesor> getProfesores();
+
+    List<Reserva> getReservas();
 }
+

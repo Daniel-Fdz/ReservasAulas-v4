@@ -5,10 +5,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IProfesore
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
 
 public interface IFuenteDatos {
+    IAulas crearAulas();
 
-	IAulas crearAulas();
-	
-	IProfesores crearProfesores();
-	
-	IReservas crearReservas();
+    IProfesores crearProfesores();
+
+    IReservas crearReservas();
 }

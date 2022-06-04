@@ -8,15 +8,19 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 
 public interface IProfesores {
 
-	List<Profesor> getProfesores();
-	
-	int getNumProfesores();
-	
-	void insertar(Profesor profesor) throws OperationNotSupportedException;
-	
-	Profesor buscar(Profesor profesor);
-	
-	void borrar(Profesor profesor) throws OperationNotSupportedException;
-	
-	List<String> representar();
+    List<Profesor> getProfesores();
+
+    void comenzar();
+
+    void terminar();
+
+    int getNumProfesores();
+
+    void insertar(Profesor profesor) throws OperationNotSupportedException;
+
+    Profesor buscar(Profesor profesor);
+
+    void borrar(Profesor profesor) throws OperationNotSupportedException;
+
+    List<String> representar();
 }

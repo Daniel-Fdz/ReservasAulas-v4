@@ -1,5 +1,13 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -12,6 +20,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
 
 public class Aulas implements IAulas {
 
+    private static final String NOMBRE_FICHERO_AULAS = "datos/FichAulas.dat";
     private List<Aula> coleccionAulas;
 
     // Constructor por defecto que crea un ArrayList
@@ -30,12 +39,49 @@ public class Aulas implements IAulas {
 
     @Override
     public void comenzar() {
-
+        leer();
     }
 
+    private void leer() {
+        File archivo = new File(NOMBRE_FICHERO_AULAS);
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(archivo))) {
+            Aula aula = null;
+
+            do {
+                aula = (Aula) entrada.readObject();
+                insertar(aula);
+            } while(aula != null);
+        } catch(FileNotFoundException e) {
+            System.out.println("ERROR: Fichero no encontrado.");
+        } catch(EOFException e) {
+            System.out.println("Fichero leído correctamente.");
+        } catch(IOException e) {
+            System.out.println("Error de I/O.");
+        } catch(ClassNotFoundException e) {
+            System.out.println("ERROR: No se ha encontrado la clase.");
+        } catch (OperationNotSupportedException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
     @Override
     public void terminar() {
+        escribir();
+    }
 
+    private void escribir() {
+        File archivo = new File(NOMBRE_FICHERO_AULAS);
+
+        try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(archivo))) {
+            for (Aula aula : coleccionAulas) {
+                salida.writeObject(aula);
+            }
+            System.out.println("Fichero de aulas actualizado");
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: No se pudo crear el fichero.");
+        } catch (IOException e) {
+            System.out.println("Error de I/O.");
+        }
     }
 
     // Método que establece las aulas
@@ -47,7 +93,7 @@ public class Aulas implements IAulas {
         }
     }
 
-    // Método que devuelve una copia profunda de las aulas
+    // M�todo que devuelve una copia profunda de las aulas
     public List<Aula> getAulas() {
         List<Aula> lista = copiaProfundaAulas(coleccionAulas);
         lista.sort(Comparator.comparing(Aula::getNombre));

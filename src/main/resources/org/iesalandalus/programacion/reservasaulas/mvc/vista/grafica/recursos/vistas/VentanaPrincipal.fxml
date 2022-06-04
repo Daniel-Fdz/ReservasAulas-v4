@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.grafica.controladores.ControladorVentanaPrincipal">
+    <children>
+        <Label layoutX="196.0" layoutY="115.0" text="Gestión de reservas de aulas">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="73.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../imagenes/booking.png" />
+            </image>
+        </ImageView>
+        <MenuBar prefHeight="25.0" prefWidth="600.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Archivo">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#cerrarAplicacion" text="Cerrar aplicación" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                    <items>
+                        <MenuItem fx:id="menuAcercaDe" mnemonicParsing="false" onAction="#acercaDe" text="Acerca de" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <HBox alignment="CENTER" layoutX="55.0" layoutY="180.0" prefHeight="130.0" prefWidth="491.0" spacing="35.0">
+            <children>
+                  <Button fx:id="btnOperacionesAulas" mnemonicParsing="false" onAction="#operacionesAulas" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 8;" text="Operaciones con aulas" textAlignment="CENTER" wrapText="true">
+                      <graphic>
+                          <ImageView>
+                              <Image url="@../imagenes/aulas.png" />
+                          </ImageView>
+                      </graphic>
+                  </Button>
+                  <Button fx:id="btnOperacionesReservas" mnemonicParsing="false" onAction="#operacionesReservas" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 8;" text="Operaciones con reservas" textAlignment="CENTER" wrapText="true">
+                      <graphic>
+                          <ImageView>
+                              <Image url="@../imagenes/reservas.png" />
+                          </ImageView>
+                      </graphic>
+                  </Button>
+                  <Button fx:id="btnOperacionesProfesores" mnemonicParsing="false" onAction="#operacionesProfesores" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 8;" text="Operaciones con profesores" textAlignment="CENTER" wrapText="true">
+                      <graphic>
+                          <ImageView>
+                              <Image url="@../imagenes/profesor.png" />
+                          </ImageView>
+                      </graphic>
+                  </Button>
+            </children>
+        </HBox>
+    </children>
+</Pane>
